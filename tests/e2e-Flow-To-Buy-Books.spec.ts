@@ -10,12 +10,12 @@ import { logOutForm } from './fixture/logOutPage';
     let shoppingCartAdd;
 
 [
-  { username: 'test.robot@gmail.com', password: 'Password@123', shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
-  { username: 'test.3@gmail.com', password: 'Password@123', shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
-  { username: 'test.4@gmail.com', password: 'Password@123', shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' }
+  { username: process.env.username_robot, password: process.env.password, shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
+  { username: process.env.username_3, password: process.env.password, shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
+  { username: process.env.username_4, password: process.env.password, shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' }
 ].forEach(({ username, password, shippingmethod, paymentmethod }) => {
 
-  test(`E2E journey to buy book for ${username} with ${shippingmethod} and payment method ${paymentmethod}`, async ({ page }) => {
+  test(`E2E journey to buy book for ${username} with ${shippingmethod} and payment method ${paymentmethod}`,{tag: '@BuyBooks'}, async ({ page }) => {
 
     login = new logInForm(page);
     logOut = new logOutForm(page);
@@ -24,7 +24,7 @@ import { logOutForm } from './fixture/logOutPage';
     await login.login(username, password);
     await shoppingCartAdd.emptyCart();
     switch (username) {
-      case "test.robot@gmail.com":
+      case process.env.username_robot:
         //click on books category
         await bookAdd.addBook("ComputingAndInternet");
         await expect(shoppingCartAdd.itemInCart).toBeVisible();
@@ -34,7 +34,7 @@ import { logOutForm } from './fixture/logOutPage';
         await expect(login.logInLink).toBeVisible();
         break;
 
-      case "test.3@gmail.com":
+      case process.env.username_3:
         //click on books category
         await bookAdd.addBook("HealthAndBook");
         await expect(shoppingCartAdd.itemInCart).toBeVisible();
@@ -44,7 +44,7 @@ import { logOutForm } from './fixture/logOutPage';
         await expect(login.logInLink).toBeVisible();
         break;
 
-      case "test.4@gmail.com":
+      case process.env.username_4:
         //click on books category
         await bookAdd.addBook("Fiction");
         await expect(shoppingCartAdd.itemInCart).toBeVisible();

@@ -11,13 +11,13 @@ import { logOutForm } from './fixture/logOutPage';
     let shoppingCartAdd;
 
 [
-  { username: 'test.12@gmail.com', password: 'Password@123' },
-  { username: 'test.13@gmail.com', password: 'Password@123' },
-  { username: 'test.14@gmail.com', password: 'Password@123' },
-  { username: 'test.15@gmail.com', password: 'Password@123' },
+  { username: process.env.username_12, password: process.env.password },
+  { username: process.env.username_13, password: process.env.password },
+  { username: process.env.username_14, password: process.env.password },
+  { username: process.env.username_15, password: process.env.password },
 ].forEach(({ username, password }) => {
 
-  test(`Add Computing and internet book to the cart ${username}`, async ({ page }) => {
+  test(`Add Computing and internet book to the cart ${username}`,{tag: '@AddBooksToCart'}, async ({ page }) => {
     login = new logInForm(page);
     logOut = new logOutForm(page);
     bookAdd = new addBook(page);
@@ -28,16 +28,16 @@ import { logOutForm } from './fixture/logOutPage';
     console.log(emailAccount[0])
     //validate username display correctly
     await expect(emailAccount[0]).toBe(username);
-    if(username=='test.12@gmail.com'){
+    if(username==process.env.username_12){
     await bookAdd.addBook("ComputingAndInternet");
     await expect(shoppingCartAdd.itemInCart).toBeVisible();
     }
-    else if(username=='test.13@gmail.com'){
+    else if(username==process.env.username_13){
       await bookAdd.addBook("Fiction");
       await expect(shoppingCartAdd.itemInCart).toBeVisible();
 
     }
-    else if(username=='test.14@gmail.com'){
+    else if(username==process.env.username_14){
       await bookAdd.addBook("HealthAndBook");
       await expect(shoppingCartAdd.itemInCart).toBeVisible();
 
