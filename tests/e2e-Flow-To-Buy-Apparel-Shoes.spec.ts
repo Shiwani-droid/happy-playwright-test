@@ -12,14 +12,13 @@ import { addApparelAndShoes } from './fixture/apparelAndShoes';
     let apparelAndShoes;
 
 [
-  { username: 'test.7@gmail.com', password: 'Password@123',shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
-  { username: 'test.8@gmail.com', password: 'Password@123', shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
-  { username: 'test.9@gmail.com', password: 'Password@123',shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' },
-  { username: 'test.10@gmail.com', password: 'Password@123',shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' },
-  // {username: 'test.18@gmail.com', password: 'Password@123',shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order'}
+  { username: process.env.username_7, password: process.env.password,shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
+  { username: process.env.username_8, password: process.env.password, shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
+  { username: process.env.username_9, password: process.env.password,shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' },
+  { username: process.env.username_10, password: process.env.password,shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' }
 ].forEach(({ username, password, shippingmethod, paymentmethod }) => {
 
-  test(`E2E journey to buy apparel and shoes for ${username} with ${shippingmethod} and payment method ${paymentmethod}`, async ({ page }) => {
+  test(`E2E journey to buy apparel and shoes for ${username} with ${shippingmethod} and payment method ${paymentmethod}`,{tag: '@BuyApparelAndShoes'}, async ({ page }) => {
     login = new logInForm(page);
     logOut = new logOutForm(page);
     apparelAndShoes = new addApparelAndShoes(page);
@@ -31,7 +30,7 @@ import { addApparelAndShoes } from './fixture/apparelAndShoes';
     //validate username display correctly
     await expect(emailAccount[0]).toBe(username);
     switch (username) {
-          case "test.7@gmail.com":
+          case process.env.username_7:
             //click on books category
             await apparelAndShoes.addApparelAndShoesItems("50's Rockabilly Polka Dot Top JR Plus Size")
             await expect(shoppingCartAdd.itemInCart).toBeVisible();
@@ -41,7 +40,7 @@ import { addApparelAndShoes } from './fixture/apparelAndShoes';
             await expect(login.logInLink).toBeVisible();
             break;
     
-          case "test.8@gmail.com":
+          case process.env.username_8:
             //click on books category
             await apparelAndShoes.addApparelAndShoesItems("Blue and green Sneaker")
             await expect(shoppingCartAdd.itemInCart).toBeVisible();
@@ -51,7 +50,7 @@ import { addApparelAndShoes } from './fixture/apparelAndShoes';
             await expect(login.logInLink).toBeVisible();
             break;
 
-          case "test.9@gmail.com":
+          case process.env.username_9:
             //click on books category
             await apparelAndShoes.addApparelAndShoesItems("Blue Jeans")
             await expect(shoppingCartAdd.itemInCart).toBeVisible();
@@ -61,7 +60,7 @@ import { addApparelAndShoes } from './fixture/apparelAndShoes';
             await expect(login.logInLink).toBeVisible();
             break;
 
-            case "test.10@gmail.com":
+            case process.env.username_10:
             //click on books category
             await apparelAndShoes.addApparelAndShoesItems("Casual Golf Belt")
             await expect(shoppingCartAdd.itemInCart).toBeVisible();
