@@ -74,9 +74,7 @@ test('Get Resource Not Found', async () => {
   //validate status
   expect(await response.status()).toBeTruthy()
   expect(await response.status()).toBe(404);
-
 });
-
 
 test('Create user', async () => {
   const response= await apiContext.post('/api/users', {
@@ -93,7 +91,6 @@ test('Create user', async () => {
 test('Update user by Put request', async () => {
   const postAPIResponse = await apiContext.put('/api/users/2', {
     data: usersPutRequestBody
-
   })
   expect(postAPIResponse.ok()).toBeTruthy();
   expect(postAPIResponse.status()).toBe(200);
@@ -115,7 +112,6 @@ test('Update user by patch request', async () => {
   expect(postAPIResponseBody).toHaveProperty("job", "QA")
 });
 
-
 test('Delete user', async () => {
   const getAPIResponse = await apiContext.delete('/api/users/7')
   //validate status
@@ -126,7 +122,6 @@ test('Delete user', async () => {
 test('Register user successfully', async () => {
   const postAPIResponse = await apiContext.post('/api/register', {
     data: usersPostRequestBodyToRegisterSuccessfully
-
   })
   expect(postAPIResponse.status()).toBe(200);
   //Validate json properties
