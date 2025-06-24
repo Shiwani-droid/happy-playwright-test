@@ -22,7 +22,7 @@
  - `test.skip` / `test.only` - To skip or run specific test by using this tags in test file
 
  # Tags
- - Sometimes we want to run particular category of test or specific integration test. In that case tags are very helpful
+ - Sometimes we want to run particular category of test or specific test like Smoke/Regression test. In that case tags are very helpful
 
  # Command to run the test with particular tag
  - `npx playwright test --grep "{@tagName}"`        - To run the test with single tag
