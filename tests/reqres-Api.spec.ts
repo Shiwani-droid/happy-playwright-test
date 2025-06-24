@@ -1,5 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, request } from '@playwright/test';
 
+const { createApiContext } = require('../tests/fixture/apiClient');
 const usersPostRequestBody = require('../tests/test-data-for-api/post_request_body_to_create_users .json');
 const usersPutRequestBody = require('../tests/test-data-for-api/put_request_body_to_update_users.json')
 const usersPatchRequestBody = require('../tests/test-data-for-api/patch_request_body_to_update_users.json')
@@ -7,16 +8,23 @@ const usersPostRequestBodyToRegisterSuccessfully = require('../tests/test-data-f
 const usersPostRequestBodyToRegisterUnsuccessful = require('../tests/test-data-for-api/post_request_body_to_register_user_unsuccessful.json')
 const usersPostRequestBodyToLoginUserSuccessfully = require('../tests/test-data-for-api/post_request_body_to_login-user-successfully.json')
 
+let apiContext// Declare it globally
 
-test('Get list of users', async ({ request }) => {
-  const getAPIResponse = await request.get('https://reqres.in/api/users?page=2')
+test.beforeAll(async () => {
+  apiContext = await createApiContext()
+});
+
+
+test('Get list of users', async () => {
+  // const apiContext = await createApiContext();
+  const getAPIResponse = await apiContext.get('/api/users?page=2')
   //validate status
   expect(getAPIResponse.ok()).toBeTruthy();
   expect(await getAPIResponse.status()).toBe(200);
 });
 
 test('Get single User', async ({ request }) => {
-  const getAPIResponse = await request.get('https://reqres.in/api/users/2')
+  const getAPIResponse = await apiContext.get('/api/users/2')
   //validate status
   expect(getAPIResponse.ok()).toBeTruthy();
   expect(await getAPIResponse.status()).toBe(200);
@@ -32,26 +40,25 @@ test('Get single User', async ({ request }) => {
   expect (getApiResponseBody.support).toHaveProperty("text");
 });
 
-test('Get single user not found', async ({ request }) => {
-  const getAPIResponse = await request.get('https://reqres.in/api/users/23')
-  //validate status
-  expect(await getAPIResponse.status()).toBe(404);
+test('Get single user not found', async () => {
+  const response = await apiContext.get('/api/users/23')
+  expect(await response.status()).toBe(404)
 });
 
-test('Get list of Resource', async ({ request }) => {
-  const getAPIResponse = await request.get('https://reqres.in/api/unknown')
+test('Get list of Resource', async () => {
+  const response= await apiContext.get('/api/unknown');
   //validate status
-  expect(await getAPIResponse.status()).toBeTruthy()
-  expect(await getAPIResponse.status()).toBe(200);
+  expect(await response.status()).toBeTruthy()
+  expect(await response.status()).toBe(200);
 });
 
-test('Get list of single Resource', async ({ request }) => {
-  const getAPIResponse = await request.get('https://reqres.in/api/unknown/2')
+test('Get list of single Resource', async () => {
+  const response= await apiContext.get('/api/unknown/2');
   //validate status
-  expect(await getAPIResponse.status()).toBeTruthy()
-  expect(await getAPIResponse.status()).toBe(200);
+  expect(await response.status()).toBeTruthy()
+  expect(await response.status()).toBe(200);
   //Get the response
-  const getApiResponseBody = await getAPIResponse.json();
+  const getApiResponseBody = await response.json();
   //Validating response body keys
   expect (getApiResponseBody.data).toHaveProperty("id");
   expect (getApiResponseBody.data).toHaveProperty("name");
@@ -62,29 +69,29 @@ test('Get list of single Resource', async ({ request }) => {
   expect (getApiResponseBody.support).toHaveProperty("text");
 });
 
-test('Get Resource Not Found', async ({ request }) => {
-  const getAPIResponse = await request.get('https://reqres.in/api/unknown/23')
+test('Get Resource Not Found', async () => {
+  const response= await apiContext.get('/api/unknown/23');
   //validate status
-  expect(await getAPIResponse.status()).toBeTruthy()
-  expect(await getAPIResponse.status()).toBe(404);
+  expect(await response.status()).toBeTruthy()
+  expect(await response.status()).toBe(404);
 
 });
 
 
-test('Create user', async ({ context }) => {
-  const postAPIResponse = await context.request.post('https://reqres.in/api/users', {
+test('Create user', async () => {
+  const response= await apiContext.post('/api/users', {
     data: usersPostRequestBody
   })
-  expect(postAPIResponse.ok()).toBeTruthy();
-  expect(postAPIResponse.status()).toBe(201);
+  expect(response.ok()).toBeTruthy();
+  expect(response.status()).toBe(201);
   //Validate json properties
-  const postAPIResponseBody = await postAPIResponse.json();
+  const postAPIResponseBody = await response.json();
   expect(postAPIResponseBody).toHaveProperty("name", "Jolly")
   expect(postAPIResponseBody).toHaveProperty("job", "Head of Deptt")
 });
 
-test('Update user by Put request', async ({ context }) => {
-  const postAPIResponse = await context.request.put('https://reqres.in/api/users/2', {
+test('Update user by Put request', async () => {
+  const postAPIResponse = await apiContext.put('/api/users/2', {
     data: usersPutRequestBody
 
   })
@@ -96,8 +103,8 @@ test('Update user by Put request', async ({ context }) => {
   expect(postAPIResponseBody).toHaveProperty("job", "HR")
 });
 
-test('Update user by patch request', async ({ context }) => {
-  const postAPIResponse = await context.request.patch('https://reqres.in/api/users/9', {
+test('Update user by patch request', async () => {
+  const postAPIResponse = await apiContext.patch('/api/users/9', {
     data: usersPatchRequestBody
   })
   expect(postAPIResponse.ok()).toBeTruthy();
@@ -109,15 +116,15 @@ test('Update user by patch request', async ({ context }) => {
 });
 
 
-test('Delete user', async ({ request }) => {
-  const getAPIResponse = await request.delete('https://reqres.in/api/users/7')
+test('Delete user', async () => {
+  const getAPIResponse = await apiContext.delete('/api/users/7')
   //validate status
   expect(await getAPIResponse.status()).toBe(204);
   // console.log(await getAPIResponse.json())
 });
 
-test('Register user successfully', async ({ context }) => {
-  const postAPIResponse = await context.request.post('https://reqres.in/api/register', {
+test('Register user successfully', async () => {
+  const postAPIResponse = await apiContext.post('/api/register', {
     data: usersPostRequestBodyToRegisterSuccessfully
 
   })
@@ -128,19 +135,18 @@ test('Register user successfully', async ({ context }) => {
   expect(postAPIResponseBody).toHaveProperty("token","QpwL5tke4Pnpja7X4")
 });
 
-test('Register user un-successful', async ({ context }) => {
-  const postAPIResponse = await context.request.post('https://reqres.in/api/register', {
+test('Register user un-successful', async () => {
+  const postAPIResponse = await apiContext.post('/api/register', {
     data: usersPostRequestBodyToRegisterUnsuccessful
   })
   expect(postAPIResponse.status()).toBe(400);
   //Validate json properties
   const postAPIResponseBody = await postAPIResponse.json();
   expect(postAPIResponseBody).toHaveProperty("error","Missing password");
-  console.log(postAPIResponseBody)
 });
 
-test('Successful Login', async ({ context }) => {
-  const postAPIResponse = await context.request.post('https://reqres.in/api/login', {
+test('Successful Login', async () => {
+  const postAPIResponse = await apiContext.post('/api/login', {
     data: usersPostRequestBodyToLoginUserSuccessfully
   })
   expect(postAPIResponse.status()).toBe(200);
@@ -149,8 +155,8 @@ test('Successful Login', async ({ context }) => {
   expect(postAPIResponseBody).toHaveProperty("token","QpwL5tke4Pnpja7X4");
 });
 
-test('Un-Successful Login', async ({ context }) => {
-  const postAPIResponse = await context.request.post('https://reqres.in/api/login', {
+test('Un-Successful Login', async () => {
+  const postAPIResponse = await apiContext.post('/api/login', {
     data: usersPostRequestBodyToRegisterUnsuccessful
   })
   expect(postAPIResponse.status()).toBe(400);
@@ -158,10 +164,3 @@ test('Un-Successful Login', async ({ context }) => {
   const postAPIResponseBody = await postAPIResponse.json();
   expect(postAPIResponseBody).toHaveProperty("error","Missing password");
 });
-
-
-
-
-
-
-
