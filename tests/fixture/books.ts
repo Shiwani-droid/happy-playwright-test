@@ -12,15 +12,13 @@ export class addBook {
   readonly healthBook: Locator;
   readonly healthBookAddToTheCart: Locator;
   readonly shoppingCart: Locator;
-
-
   readonly computingAndInternetBookA: Locator;
   readonly fictionBookB: Locator;
   readonly HealthAndBookC: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.bookCategoryClick = page.locator('//*[@class="top-menu"]/li/a[@href="/books"]')
+     this.bookCategoryClick = page.locator('//*[@href="/books"]').first();
     this.computingAndInternetBook = page.locator("//*[text()='Computing and Internet']/parent::h2[@class='product-title']")
     this.computingAndInternetAddToTheCart = page.locator('//*[@id="add-to-cart-button-13"]');
     this.fictionBook = page.locator("//*[text()='Fiction']/parent::h2[@class='product-title']");
@@ -28,11 +26,9 @@ export class addBook {
     this.healthBook = page.locator("//*[text()='Health Book']/parent::h2[@class='product-title']");
     this.healthBookAddToTheCart = page.locator('//*[@id="add-to-cart-button-22"]');
     this.shoppingCart = page.locator("//*[@class='ico-cart']/parent::li[@id='topcartlink']");
-
     this.computingAndInternetBookA = page.locator('//*[contains(@onclick,"13")]');
     this.fictionBookB = page.locator('//*[contains(@onclick,"45")]');
     this.HealthAndBookC = page.locator('//*[contains(@onclick,"22")]')
-
   }
 
 
@@ -40,7 +36,7 @@ export class addBook {
     let gotToCart = new shoppingCart(this.page)
     await this.bookCategoryClick.click();
     switch (book) {
-            
+
       case "ComputingAndInternet":
         await this.computingAndInternetBookA.click();
         await gotToCart.shoppingCartLinkClick()
@@ -49,7 +45,6 @@ export class addBook {
           await this.computingAndInternetBookA.click();
           await gotToCart.shoppingCartLinkClick();
         }
-
         break;
 
       case "Fiction":
@@ -78,5 +73,4 @@ export class addBook {
         break;
     }
   }
-
 }

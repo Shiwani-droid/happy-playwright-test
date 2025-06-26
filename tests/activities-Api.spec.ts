@@ -29,7 +29,6 @@ test('Add activity by POST request', async ({ context }) => {
 test('Get specific Activity by ID', async ({ request }) => {
   const getAPIResponse = await request.get('https://fakerestapi.azurewebsites.net/api/v1/Activities/5')
   //validate status
-  // expect(getAPIResponse.ok()).toBeTruthy();
   expect(getAPIResponse.status()).toBe(200)
   //Validate json properties
   const getAPIResponseBody = await getAPIResponse.json();

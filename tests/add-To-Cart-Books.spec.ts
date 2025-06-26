@@ -4,7 +4,6 @@ import { addBook } from './fixture/books';
 import { shoppingCart } from './fixture/shoppingCart';
 import { logOutForm } from './fixture/logOutPage';
 
-
     let login;
     let logOut;
     let bookAdd;

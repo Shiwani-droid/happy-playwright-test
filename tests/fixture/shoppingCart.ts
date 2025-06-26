@@ -49,10 +49,6 @@ export class shoppingCart {
   //Thank you page
   readonly successfulOrderContinueButton: Locator;
 
-
-
-
-
   constructor(page: Page) {
     this.page = page;
     this.shoppingCart = page.locator("//*[@class='ico-cart']/parent::li[@id='topcartlink']");
@@ -104,11 +100,7 @@ export class shoppingCart {
       if (!(await this.removeFromCartCheckbox.first().isVisible())) {
         break;
       }
-
     }
-    // const logOut = new logOutForm(this.page)
-    //  await logOut.logOut()
-
   }
 
   async checkoutBook(shippingMehtod: string, paymentMethod: string, creditCardType: string, cardHolderNameInput: string, cardNumberInput: number, expireMonth: string, expireYear: string, cardCordInput: number
@@ -185,7 +177,5 @@ export class shoppingCart {
     await this.purchaseOrderPaymentMethod.click();
     await this.paymenthMethodContinueButton.click();
     await this.purchaseOrderNumberTextBox.fill("1234");
-
   }
-
 }

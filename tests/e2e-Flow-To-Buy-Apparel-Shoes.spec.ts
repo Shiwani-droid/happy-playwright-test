@@ -5,7 +5,6 @@ import { shoppingCart } from './fixture/shoppingCart';
 import { logOutForm } from './fixture/logOutPage';
 import { addApparelAndShoes } from './fixture/apparelAndShoes';
 
-
     let login;
     let logOut;
     let shoppingCartAdd;

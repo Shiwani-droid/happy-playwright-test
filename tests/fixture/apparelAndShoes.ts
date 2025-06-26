@@ -18,10 +18,6 @@ export class addApparelAndShoes {
   readonly casualGolfBeltAddToTheCart: Locator;
   readonly genuineLeatherHandbagAddToTheCart: Locator;
 
-
-
-
-
   constructor(page: Page) {
     this.page = page;
     this.apparelAndShoesClick = page.locator('//*[@class="top-menu"]/li/a[@href="/apparel-shoes"]');
@@ -30,13 +26,10 @@ export class addApparelAndShoes {
     this.blueJeans= page.locator('//*[contains(@onclick,"36")]');
     this.casualGolfBelt= page.locator('//*[contains(@onclick,"40")]');
     this.genuineLeatherHandbag= page.locator('//*[contains(@onclick,"29")]');
-
-
     this.rockabillyPolkaDotTopJRPlusSizeAddToTheCart = page.locator('//*[@id="add-to-cart-button-5"]');
     this.blueAndGreenSneakerAddToTheCart = page.locator('//*[@id="add-to-cart-button-28"]');
     this.blueJeansAddToTheCart = page.locator('//*[@id="add-to-cart-button-36"]');
     this.casualGolfBeltAddToTheCart = page.locator('//*[@id="add-to-cart-button-40"]');
-    // this.genuineLeatherHandbagAddToTheCart = page.locator['//*[@id="add-to-cart-button-5"]'];
   }
 
 
@@ -54,7 +47,6 @@ export class addApparelAndShoes {
           await this.rockabillyPolkaDotTopJRPlusSizeAddToTheCart.click();
           await gotToCart.shoppingCartLinkClick();
         }
-
         break;
 
       case "Blue and green Sneaker":
@@ -72,26 +64,22 @@ export class addApparelAndShoes {
 
       case "Blue Jeans":
         await this.blueJeans.click();
-        // await this.blueJeansAddToTheCart.click();
         await gotToCart.shoppingCartLinkClick()
 
         if (await gotToCart.shoppingCartEmptyMessage.isVisible()) {
           await this.apparelAndShoesClick.click();
           await this.blueJeans.click();
-          // await this.blueJeansAddToTheCart.click();
           await gotToCart.shoppingCartLinkClick();
         }
         break;
 
         case "Casual Golf Belt":
         await this.casualGolfBelt.click();
-        // await this.casualGolfBeltAddToTheCart.click();
         await gotToCart.shoppingCartLinkClick()
 
         if (await gotToCart.shoppingCartEmptyMessage.isVisible()) {
           await this.apparelAndShoesClick.click();
           await this.casualGolfBelt.click();
-          // await this.casualGolfBeltAddToTheCart.click();
           await gotToCart.shoppingCartLinkClick();
         }
         break;
@@ -100,6 +88,5 @@ export class addApparelAndShoes {
         break;
     }
   }
-
 }
 
