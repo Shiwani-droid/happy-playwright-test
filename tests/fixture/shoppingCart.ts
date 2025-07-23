@@ -51,40 +51,38 @@ export class shoppingCart {
 
   constructor(page: Page) {
     this.page = page;
-    this.shoppingCart = page.locator("//*[@class='ico-cart']/parent::li[@id='topcartlink']");
-    this.itemInCart = page.locator("//*[@class='product-name']").first();
-    this.removeFromCartCheckbox = page.locator("//*[@name='removefromcart']");
-    this.updateShoppingCartButton = page.locator('//*[@name="updatecart"]');
-    this.computingAndInternetAtShoppingCart = page.locator('//*[@value="4912734"]');
-    this.healthBookInCart = page.locator('//*[@value="4912733"]');
-    this.fictionAtShoppingCart = page.locator('//*[@value="4912735"]')
-    this.termsOfServiceCheckbox = page.locator('//*[@id="termsofservice"]');
-    this.checkoutButton = page.locator('//*[@id="checkout"]');
-    this.billingAddressContinueButton = page.locator('//*[@onclick="Billing.save()"]');
-    this.shippingAddressContinueButton = page.locator('//*[@onclick="Shipping.save()"]');
-    this.groundShippingMethod = page.locator('//*[@id="shippingoption_0"]');
-    this.nextDayAirShippingMethod = page.locator('//*[@id="shippingoption_1"]');
-    this.secondDayAirShippingMethod = page.locator('//*[@id="shippingoption_2"]');
-    this.shippingMethodContinueButton = page.locator('//*[@onclick="ShippingMethod.save()"]')
-    this.codPaymentMothod = page.locator('//*[@value="Payments.CashOnDelivery"]');
-    this.checkOrMoneyOrderPaymentMethod = page.locator('//*[@value="Payments.CheckMoneyOrder"]')
-    this.creditCardPaymentMethod = page.locator('//*[@value="Payments.Manual"]')
-    this.selectCreditCardDropdown = page.locator('//*[@id="CreditCardType"]');
-    this.cardHolderNameTextBox = page.locator('//*[@id="CardholderName"]');
-    this.cardNumberTextBox = page.locator('//*[@id="CardNumber"]');
-    this.expirationDateSelect = page.locator('//*[@id="ExpireMonth"]');
-    this.expirationYearSelect = page.locator('//*[@id="ExpireYear"]')
-    this.cardCode = page.locator('//*[@id="CardCode"]');
-    this.purchaseOrderPaymentMethod = page.locator('//*[@value="Payments.PurchaseOrder"]');
-    this.paymenthMethodContinueButton = page.locator('//*[@onclick="PaymentMethod.save()"]');
-    this.paymentInformationConitnueButton = page.locator('//*[@onclick="PaymentInfo.save()"]');
-    this.purchaseOrderNumberTextBox = page.locator('//*[@id="PurchaseOrderNumber"]');
-    this.confirmOrderConfirmButton = page.locator('//*[@onclick="ConfirmOrder.save()"]');
-    this.successfulOrderMessage = page.locator('//strong[text()="Your order has been successfully processed!"]')
-    this.successfulOrderContinueButton = page.locator('//*[@class="button-2 order-completed-continue-button"]')
-
-    this.shoppingCartEmptyMessage = page.locator('//*[contains(text(),"Your Shopping Cart is empty")]');
-
+    this.shoppingCart = page.locator('//span[normalize-space()="Shopping cart"]')
+    this.itemInCart = page.locator('.product-name').first();
+    this.removeFromCartCheckbox = page.locator('[name="removefromcart"]');
+    this.updateShoppingCartButton = page.locator('[name="updatecart"]');
+    this.computingAndInternetAtShoppingCart = page.locator('[value="4912734"]');
+    this.healthBookInCart = page.locator('[value="4912733"]');
+    this.fictionAtShoppingCart = page.locator('[value="4912735"]')
+    this.termsOfServiceCheckbox = page.locator('#termsofservice');
+    this.checkoutButton = page.locator('#checkout');
+    this.billingAddressContinueButton = page.locator('[onclick="Billing.save()"]');
+    this.shippingAddressContinueButton = page.locator('[onclick="Shipping.save()"]');
+    this.groundShippingMethod = page.locator('#shippingoption_0');
+    this.nextDayAirShippingMethod = page.locator('#shippingoption_1');
+    this.secondDayAirShippingMethod = page.locator('#shippingoption_2');
+    this.shippingMethodContinueButton = page.locator('[onclick="ShippingMethod.save()"]')
+    this.codPaymentMothod = page.locator('[value="Payments.CashOnDelivery"]');
+    this.checkOrMoneyOrderPaymentMethod = page.locator('[value="Payments.CheckMoneyOrder"]')
+    this.creditCardPaymentMethod = page.locator('[value="Payments.Manual"]')
+    this.selectCreditCardDropdown = page.locator('#CreditCardType');
+    this.cardHolderNameTextBox = page.locator('#CardholderName');
+    this.cardNumberTextBox = page.locator('#CardNumber');
+    this.expirationDateSelect = page.locator('#ExpireMonth');
+    this.expirationYearSelect = page.locator('#ExpireYear')
+    this.cardCode = page.locator('#CardCode');
+    this.purchaseOrderPaymentMethod = page.locator('[value="Payments.PurchaseOrder"]');
+    this.paymenthMethodContinueButton = page.locator('[onclick="PaymentMethod.save()"]');
+    this.paymentInformationConitnueButton = page.locator('[onclick="PaymentInfo.save()"]');
+    this.purchaseOrderNumberTextBox = page.locator('#PurchaseOrderNumber');
+    this.confirmOrderConfirmButton = page.locator('[onclick="ConfirmOrder.save()"]');
+    this.successfulOrderMessage = page.getByText('Your order has been successfully processed!');
+    this.successfulOrderContinueButton = page.locator('.button-2.order-completed-continue-button')
+    this.shoppingCartEmptyMessage = page.getByText('Your Shopping Cart is empty');
   }
 
   async shoppingCartLinkClick() {

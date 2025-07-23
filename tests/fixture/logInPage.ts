@@ -14,11 +14,11 @@ export class logInForm {
   constructor(page: Page) {
     this.page = page;
     this.logInLink = page.locator('text=Log in');
-    this.emailField = page.locator('//*[@id="Email"]');
-    this.passwordField = page.locator('//*[@id="Password"]');
-    this.logInButton = page.locator('//*[@value="Log in"]');
+    this.emailField = page.locator('#Email');
+    this.passwordField = page.locator('#Password');
+    this.logInButton = page.locator('[value="Log in"]');
     this.logOutLink = page.locator('text=Log out');
-    this.username = page.locator('//*[@class="account"]')
+    this.username = page.locator('.account');
   }
 
   async login(username: string, password: string) {

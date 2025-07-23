@@ -11,21 +11,20 @@ export class addBook {
   readonly fictionBookAddToTheCart: Locator;
   readonly healthBook: Locator;
   readonly healthBookAddToTheCart: Locator;
-  readonly shoppingCart: Locator;
+  // readonly shoppingCart: Locator;
   readonly computingAndInternetBookA: Locator;
   readonly fictionBookB: Locator;
   readonly HealthAndBookC: Locator;
 
   constructor(page: Page) {
     this.page = page;
-     this.bookCategoryClick = page.locator('//*[@href="/books"]').first();
-    this.computingAndInternetBook = page.locator("//*[text()='Computing and Internet']/parent::h2[@class='product-title']")
-    this.computingAndInternetAddToTheCart = page.locator('//*[@id="add-to-cart-button-13"]');
-    this.fictionBook = page.locator("//*[text()='Fiction']/parent::h2[@class='product-title']");
-    this.fictionBookAddToTheCart = page.locator('//*[@id="add-to-cart-button-45"]');
-    this.healthBook = page.locator("//*[text()='Health Book']/parent::h2[@class='product-title']");
-    this.healthBookAddToTheCart = page.locator('//*[@id="add-to-cart-button-22"]');
-    this.shoppingCart = page.locator("//*[@class='ico-cart']/parent::li[@id='topcartlink']");
+    this.bookCategoryClick = page.locator('a[href^="/books"]').first();
+    this.computingAndInternetBook = page.locator('//h2[@class="product-title"]//a[normalize-space()="Computing and Internet"]');
+    this.computingAndInternetAddToTheCart = page.locator('#add-to-cart-button-13');
+    this.fictionBook = page.locator('//a[normalize-space()="Fiction"]');
+    this.fictionBookAddToTheCart = page.locator('#add-to-cart-button-45');
+    this.healthBook = page.locator('//a[normalize-space()="Health Book"]');
+    this.healthBookAddToTheCart = page.locator('#add-to-cart-button-22');
     this.computingAndInternetBookA = page.locator('//*[contains(@onclick,"13")]');
     this.fictionBookB = page.locator('//*[contains(@onclick,"45")]');
     this.HealthAndBookC = page.locator('//*[contains(@onclick,"22")]')
