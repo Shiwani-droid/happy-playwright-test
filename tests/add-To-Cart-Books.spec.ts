@@ -3,6 +3,8 @@ import { logInForm } from './fixture/logInPage';
 import { addBook } from './fixture/books';
 import { shoppingCart } from './fixture/shoppingCart';
 import { logOutForm } from './fixture/logOutPage';
+import { password, username_12, username_13, username_14, username_15 } from './helper/env';
+// import { password, username_12, username_13, username_14, username_15 } from './helper/env';
 
     let login;
     let logOut;
@@ -10,10 +12,10 @@ import { logOutForm } from './fixture/logOutPage';
     let shoppingCartAdd;
 
 [
-  { username: process.env.username_12, password: process.env.password },
-  { username: process.env.username_13, password: process.env.password },
-  { username: process.env.username_14, password: process.env.password },
-  { username: process.env.username_15, password: process.env.password },
+  { username: username_12, password: password },
+  { username: username_13, password: password },
+  { username: username_14, password: password },
+  { username: username_15, password: password },
 ].forEach(({ username, password }) => {
 
   test(`Add Computing and internet book to the cart ${username}`,{tag: '@AddBooksToCart'}, async ({ page }) => {

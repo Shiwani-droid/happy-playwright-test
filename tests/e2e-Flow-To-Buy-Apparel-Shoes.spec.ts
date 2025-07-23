@@ -4,6 +4,8 @@ import { addBook } from './fixture/books';
 import { shoppingCart } from './fixture/shoppingCart';
 import { logOutForm } from './fixture/logOutPage';
 import { addApparelAndShoes } from './fixture/apparelAndShoes';
+import { password, username_10, username_7, username_8, username_9 } from './helper/env';
+// import { password, username_10, username_7, username_8, username_9 } from './helper/env';
 
     let login;
     let logOut;
@@ -11,10 +13,10 @@ import { addApparelAndShoes } from './fixture/apparelAndShoes';
     let apparelAndShoes;
 
 [
-  { username: process.env.username_7, password: process.env.password,shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
-  { username: process.env.username_8, password: process.env.password, shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
-  { username: process.env.username_9, password: process.env.password,shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' },
-  { username: process.env.username_10, password: process.env.password,shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' }
+  { username: username_7, password: password, shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
+  { username: username_8, password: password, shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
+  { username: username_9, password: password,shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' },
+  { username: username_10, password: password,shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' }
 ].forEach(({ username, password, shippingmethod, paymentmethod }) => {
 
   test(`E2E journey to buy apparel and shoes for ${username} with ${shippingmethod} and payment method ${paymentmethod}`,{tag: '@BuyApparelAndShoes'}, async ({ page }) => {

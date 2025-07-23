@@ -8,6 +8,20 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+     username_robot: ${{ secrets.username_robot }}
+     username_3: ${{ secrets.username_3 }}
+     username_4: ${{ secrets.username_4 }}
+     username_7: ${{ secrets.username_7 }}
+     username_8: ${{ secrets.username_8 }}
+     username_9: ${{ secrets.username_9 }}
+     username_10: ${{ secrets.username_10 }}
+     username_12: ${{ secrets.username_12 }}
+     username_13: ${{ secrets.username_13 }}
+     username_14: ${{ secrets.username_14 }}
+     username_15: ${{ secrets.username_15 }}
+     password: ${{ secrets.password }}
+     CI: true
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4

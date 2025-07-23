@@ -3,6 +3,8 @@ import { logInForm } from './fixture/logInPage';
 import { addBook } from './fixture/books';
 import { shoppingCart } from './fixture/shoppingCart';
 import { logOutForm } from './fixture/logOutPage';
+import { password, username_3, username_4, username_robot } from './helper/env';
+// import { password, username_3, username_4, username_robot } from './helper/env';
 
     let login;
     let logOut;
@@ -10,9 +12,9 @@ import { logOutForm } from './fixture/logOutPage';
     let shoppingCartAdd;
 
 [
-  { username: process.env.username_robot, password: process.env.password, shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
-  { username: process.env.username_3, password: process.env.password, shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
-  { username: process.env.username_4, password: process.env.password, shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' }
+  { username: username_robot, password: password, shippingmethod: 'Ground', paymentmethod: 'Credit Card' },
+  { username: username_3, password: password, shippingmethod: 'Next Day Air', paymentmethod: 'Check/Money Order' },
+  { username: username_4, password: password, shippingmethod: '2nd Day Air', paymentmethod: 'Purchase Order' }
 ].forEach(({ username, password, shippingmethod, paymentmethod }) => {
 
   test(`E2E journey to buy book for ${username} with ${shippingmethod} and payment method ${paymentmethod}`,{tag: '@BuyBooks'}, async ({ page }) => {
